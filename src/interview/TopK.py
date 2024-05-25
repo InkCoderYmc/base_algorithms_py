@@ -24,10 +24,7 @@ def quicksort(nums, left, right):
         index = partition(nums, left, right)
         quicksort(nums, left, index-1)
         quicksort(nums, index+1, right)
-
-# 例子
-nums = [1,3,2,2,0]
-quicksort(nums, 0, len(nums)-1)
+    return nums
 
 # 转变一下思路，topk是希望找到一个位置，这个位置一边是k个比这个位置上数更小的数，另一半是更大的数
 def topk_split(nums, k, left, right):
@@ -42,3 +39,14 @@ def topk_split(nums, k, left, right):
             topk_split(nums, k, left, index-1)
 
 # 有了切分函数之后，很自然的就能对最小的k个数，最大的k个数，第k大的数之类的问题进行转换了，此处就不赘述了
+
+import unittest
+import random
+class TestTopK(unittest.TestCase):
+    def test_topk_arr(self):
+        nums = [random.randint(-100, 100) for _ in range(100)]
+        sorted_res = quicksort(nums, 0, len(nums)-1)
+        self.assertEqual(sorted(nums), sorted_res)
+
+if __name__ == '__main__':
+    unittest.main()
